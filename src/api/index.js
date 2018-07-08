@@ -5,8 +5,8 @@ axios.defaults.baseURL = '';
 axios.defaults.timeout = 60000;
 
 export default {
-    getMovie (){
-        return axios.get('/api/top250',{
+    getMovie (type){
+        return axios.get('/api/' + type,{
             params: {
                 start: 0,
                 count: 5

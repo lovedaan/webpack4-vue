@@ -1,10 +1,12 @@
 <template>
-    <div class="alertWrap" v-show="visible">
-        <div class="alert-con">
-            <p class="alert-text">{{content}}</p>
-            <button class="alert-bnt" @click="confirmOper">{{btnText}}</button>
+    <transition name="fade">
+        <div class="alertWrap" v-show="visible">
+            <div class="alert-con">
+                <p class="alert-text">{{content}}</p>
+                <button class="alert-bnt" @click="confirmOper">{{btnText}}</button>
+            </div>
         </div>
-    </div>
+    </transition>
 </template>
 <script>
 export default {
@@ -13,7 +15,7 @@ export default {
         return {
             content: '你要干嘛',
             btnText: '确定',
-            visible: true
+            visible: false
         }
     },
     methods: {
@@ -57,6 +59,12 @@ export default {
                 margin-top: 5px;
             }
         }
+    }
+    .fade-enter-active,.fade-leave-active{
+        transition:all 0.5s;
+    }
+    .fade-enter,.fade-leave-to{
+        opacity: 0;
     }
 </style>
 

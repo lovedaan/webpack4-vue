@@ -1,13 +1,17 @@
 <template>
-    <div class="confirmWrap" v-show="visible">
-        <div class="confirm-con">
-            <p class="confirm-text">{{content}}</p>
-            <div class="btn-opt">
-                <button class="btn confirm-btn" @click="cancelOper">{{cancelBtnText}}</button>
-                <button class="btn cancel-btn" @click="confirmOper">{{okBtnText}}</button>
+    <transition name="fade">
+        <div class="confirmWrap" v-show="visible">
+            <div class="confirmBox">
+                <div class="confirm-con">
+                    <p class="confirm-text">{{content}}</p>
+                    <div class="btn-opt">
+                        <button class="btn cancel-btn" @click="cancelOper">{{cancelBtnText}}</button>
+                        <button class="btn confirm-btn" @click="confirmOper">{{okBtnText}}</button>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
+    </transition>
 </template>
 <script>
 export default {
@@ -34,13 +38,28 @@ export default {
         left: 0;
         top: 0;
         background: rgba(0, 0, 0, .6);
-        .confirm-con{
+        &.fade-enter-active,&.fade-leave-active{
+            transition: all 0.5s;
+            .confirm-con{
+                transition: all 0.5s;
+            }
+        }
+        &.fade-enter,&.fade-leave-to{
+            opacity: 0;
+            .confirm-con{
+                opacity: 0;
+                transform: scale(0);
+            }
+        }
+        .confirmBox{
             position: absolute;
             left: 50%;
             top:50%;
+            transform: translate(-50%,-50%);
+        }
+        .confirm-con{
             width: 200px;
             height: 100px;
-            transform: translate(-50%,-50%);
             background: #fff;
             border-radius: 10px;
             text-align: center;
@@ -51,7 +70,7 @@ export default {
             }
             .btn-opt{
                 margin-top: 5px;
-                .bnt{
+                .btn{
                     display: inline-block;
                     width: 80px;
                     height: 40px;
@@ -60,11 +79,11 @@ export default {
                     text-align: center;
                     line-height: 40px;
                     border:none;
-                    &.confirm-bnt{
+                    &.confirm-btn{
                         background: yellowgreen;
                     }
-                    &.cancel-bnt{
-                        background: #f1f1f1;
+                    &.cancel-btn{
+                        background: #c2bfbf;
                     }
                 }
             }

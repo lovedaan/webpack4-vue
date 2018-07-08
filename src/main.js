@@ -7,10 +7,10 @@ import './common/css/base.less';
 
 //自定义组件
 //import message from 'base/alert/index.js';
-import { Confirm } from 'base/index.js';
+import ace  from 'base';
 //Vue.use(message);
 //Vue.use(Confirm);
-
+Vue.use(ace);
 new Vue({
     el: '#app',
     router,
