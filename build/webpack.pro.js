@@ -20,6 +20,36 @@ module.exports = merge(config, {
     },
     module: {
         rules: [{
+			  test: /\.(gif|png|jpe?g|svg|webp)$/i,
+			  use: [
+				{
+				  loader: 'image-webpack-loader',
+				  options: {
+					mozjpeg: {
+					  progressive: true,
+					  quality: 65
+					},
+					// optipng.enabled: false will disable optipng
+					optipng: {
+					  enabled: false,
+					},
+					//min-max为图片转换加一个品质限制，如果转换后的图片比最低品质还低，就不保存，并返回错误码99.取值范围 0-100
+					//转换速度与品质的比例。1(最佳品质)，10(速度最快)，默认是3
+					pngquant: {
+					  quality: '70',
+					  speed: 4
+					},
+					gifsicle: {
+					  interlaced: false,
+					},
+					// the webp option will enable WEBP
+					webp: {
+					  quality: 75
+					}
+				  }
+				},
+			  ],
+			},{
             test: /\.less$/,
             use: [MiniCssExtractPlugin.loader,
                 'css-loader',

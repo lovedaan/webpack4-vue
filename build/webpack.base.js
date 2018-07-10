@@ -13,6 +13,13 @@ module.exports = {
         path: path.join(__dirname, '../dist/'),
         filename: 'js/[name].js'
     },
+	//优化打包，可以把常见的第三方包通过CDN在html页面直接引用，在webpack中要配置以下告诉webpack不要打包这些文件
+	/*externals: {
+		'vue': 'Vue',
+		'vuex': 'Vuex',
+		'vue-router': 'VueRouter',
+		'axios': 'axios'
+	},*/
     resolve: {
         extensions: ['.js', '.vue', '.json', '.less', '.css'],
         alias: {
@@ -38,21 +45,21 @@ module.exports = {
             loader: 'url-loader',
             options: {
                 limit: 10000,
-                name: 'images/[name].[hash:7].[ext]'
+                name: 'images/[name][hash:7].[ext]'
             }
         }, {
             test: /\.(mp4|webm|ogg|mp3|wav|flac|aac)(\?.*)?$/,
             loader: 'url-loader',
             options: {
                 limit: 10000,
-                name: 'media/[name].[hash:7].[ext]'
+                name: 'media/[name][hash:7].[ext]'
             }
         }, {
             test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
             loader: 'url-loader',
             options: {
                 limit: 10000,
-                name: 'fonts/[name].[hash:7].[ext]'
+                name: 'fonts/[name][hash:7].[ext]'
             }
         }]
     },
